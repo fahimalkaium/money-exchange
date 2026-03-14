@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register - HelpNao</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+--primary-green: #74C355;
+--dark-text: #2D3436;
+--light-gray: #F4F7F6;
+--border-color: #E0E0E0;
+--white: #FFFFFF;
+}
+
+body {
+font-family: 'Inter', sans-serif;
+background-color: var(--light-gray);
+margin: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+color: var(--dark-text);
+}
+
+.login-card {
+background: var(--white);
+padding: 2.5rem;
+border-radius: 20px;
+box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+width: 100%;
+max-width: 400px;
+text-align: center;
+}
+
+.logo {
+font-weight: 700;
+font-size: 24px;
+margin-bottom: 1.5rem;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 5px;
+}
+
+.logo span {
+color: var(--primary-green);
+}
+
+h2 {
+margin-bottom: 0.5rem;
+font-weight: 700;
+}
+
+p {
+color: #636e72;
+font-size: 14px;
+margin-bottom: 2rem;
+}
+
+.form-group {
+text-align: left;
+margin-bottom: 1.2rem;
+}
+
+label {
+display: block;
+font-size: 14px;
+font-weight: 600;
+margin-bottom: 0.5rem;
+}
+
+input {
+width: 100%;
+padding: 12px 15px;
+border: 1px solid var(--border-color);
+border-radius: 8px;
+box-sizing: border-box;
+font-size: 16px;
+transition: border-color 0.3s ease;
+}
+
+input:focus {
+outline: none;
+border-color: var(--primary-green);
+}
+
+.btn-login {
+background-color: var(--primary-green);
+color: white;
+border: none;
+width: 100%;
+padding: 14px;
+border-radius: 8px;
+font-size: 16px;
+font-weight: 600;
+cursor: pointer;
+margin-top: 1rem;
+transition: opacity 0.3s ease;
+}
+
+.btn-login:hover {
+opacity: 0.9;
+}
+
+.footer-links {
+margin-top: 1.5rem;
+font-size: 14px;
+}
+
+.footer-links a {
+color: var(--primary-green);
+text-decoration: none;
+font-weight: 600;
+}
+
+.footer-links a:hover {
+text-decoration: underline;
+}
+
+.password-container{
+position: relative;
+}
+
+.password-container input{
+padding-right: 40px;
+}
+
+.eye-icon{
+position: absolute;
+right: 12px;
+top: 50%;
+transform: translateY(-50%);
+cursor: pointer;
+font-size: 18px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-card">
+
+<div class="logo">
+<img src="{{ url_for('static', filename='images/HelpNao_logo.png') }}" style="height:32px;">
+<span>HelpNao Money Change</span>
+</div>
+
+<h2>Create Account</h2>
+<p>Register to start using HelpNao services.</p>
+
+<form method="POST" action="/register">
+
+<div class="form-group">
+<label for="mobile">Mobile Number</label>
+<input type="tel" id="mobile" name="mobile" placeholder="e.g. +8801914......" required>
+</div>
+
+<div class="form-group">
+<label for="shop_name">Shop Name</label>
+
+<input type="text"
+id="shop_name"
+name="shop_name"
+placeholder="Enter your shop name"
+required>
+
+</div>
+<div class="form-group">
+<label for="password">Password</label>
+
+<div class="password-container">
+<input type="password" id="password" name="password" placeholder="••••••••" required>
+<span class="eye-icon" onclick="togglePassword('password', this)">👁</span>
+</div>
+
+</div>
+
+<div class="form-group">
+<label for="confirm_password">Confirm Password</label>
+
+<div class="password-container">
+<input type="password" id="confirm_password" name="confirm_password" placeholder="••••••••" required>
+<span class="eye-icon" onclick="togglePassword('confirm_password', this)">👁</span>
+</div>
+
+</div>
+
+<button type="submit" class="btn-login">Register</button>
+
+</form>
+
+<div class="footer-links">
+Already have an account? <a href="/login">Log in</a>
+</div>
+
+</div>
+
+<script>
+
+function togglePassword(id, icon){
+
+const password = document.getElementById(id);
+
+if(password.type === "password"){
+password.type = "text";
+icon.textContent = "🙈";
+}
+else{
+password.type = "password";
+icon.textContent = "👁";
+}
+
+}
+
+</script>
+
+</body>
+</html>

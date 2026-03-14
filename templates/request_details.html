@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Request Details - HelpNao</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--primary-green:#74C355;
+--dark-text:#2D3436;
+--light-gray:#F4F7F6;
+--border-color:#E0E0E0;
+--white:#FFFFFF;
+}
+
+body{
+font-family:'Inter', sans-serif;
+background:var(--light-gray);
+margin:0;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:var(--dark-text);
+}
+
+/* Card */
+
+.details-card{
+background:var(--white);
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+width:100%;
+max-width:450px;
+}
+
+/* Logo */
+
+.logo{
+font-weight:700;
+font-size:22px;
+margin-bottom:20px;
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.logo span{
+color:var(--primary-green);
+}
+
+/* Title */
+
+h2{
+margin-bottom:20px;
+}
+
+/* Info rows */
+
+.info{
+display:flex;
+justify-content:space-between;
+padding:10px 0;
+border-bottom:1px solid var(--border-color);
+font-size:15px;
+}
+
+/* Buttons */
+
+.actions{
+margin-top:25px;
+display:flex;
+gap:10px;
+}
+
+.btn{
+flex:1;
+padding:12px;
+border-radius:8px;
+text-align:center;
+text-decoration:none;
+font-weight:600;
+}
+
+.accept{
+background:var(--primary-green);
+color:white;
+}
+
+.back{
+background:#ecf0f1;
+color:#2d3436;
+}
+
+.btn:hover{
+opacity:0.9;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="details-card">
+
+<div class="logo">
+<img src="{{ url_for('static', filename='images/HelpNao_logo.png') }}" style="height:28px;">
+<span>HelpNao</span>
+</div>
+
+<h2>Request Details</h2>
+
+<div class="info">
+<span>Shop Name</span>
+<span>{{request[1]}}</span>
+</div>
+
+<div class="info">
+<span>Amount</span>
+<span>BDT {{request[2]}}</span>
+</div>
+
+<div class="info">
+<span>Commission</span>
+<span>BDT {{request[3]}}</span>
+</div>
+
+<div class="info">
+<span>Note</span>
+<span>{{request[4]}}</span>
+</div>
+
+<div class="info">
+<span>Created At</span>
+<span>{{request[5]}}</span>
+</div>
+
+<div class="actions">
+
+<a href="/accept/{{request[0]}}" class="btn accept">
+Accept Request
+</a>
+
+<a href="/dashboard" class="btn back">
+Back
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

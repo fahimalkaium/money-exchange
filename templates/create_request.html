@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Create Request - HelpNao</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+--primary-green: #74C355;
+--dark-text: #2D3436;
+--light-gray: #F4F7F6;
+--border-color: #E0E0E0;
+--white: #FFFFFF;
+}
+
+body {
+font-family: 'Inter', sans-serif;
+background-color: var(--light-gray);
+margin: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+color: var(--dark-text);
+}
+
+.card {
+background: var(--white);
+padding: 30px;
+border-radius: 20px;
+box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+width: 100%;
+max-width: 700px;
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+table{
+width:100%;
+border-collapse: collapse;
+margin-top:10px;
+}
+
+th,td{
+padding:10px;
+border:1px solid #ddd;
+text-align:center;
+}
+
+th{
+background:#f2f2f2;
+}
+
+input[type="number"]{
+width:80px;
+padding:6px;
+border:1px solid var(--border-color);
+border-radius:6px;
+text-align:center;
+}
+
+.highlight{
+background:#e8f8f0;
+}
+
+.total-row{
+font-weight:600;
+background:#fafafa;
+}
+
+.btn{
+background:var(--primary-green);
+color:white;
+border:none;
+padding:12px 18px;
+border-radius:8px;
+font-weight:600;
+cursor:pointer;
+margin-top:20px;
+width:100%;
+}
+
+.note-count{
+margin-top:10px;
+font-size:14px;
+color:#555;
+text-align:right;
+}
+
+.error{
+color:red;
+font-size:14px;
+margin-top:10px;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Create Change Request</h2>
+
+<form method="POST" onsubmit="return validateForm()">
+
+<table>
+
+<tr>
+<th>Note Value</th>
+<th>Quantity</th>
+<th>Total (BDT)</th>
+</tr>
+
+<tr id="row500">
+<td>500</td>
+<td><input type="number" name="n500" value="0" min="0" onchange="calc()"></td>
+<td id="t500">0</td>
+</tr>
+
+<tr id="row200">
+<td>200</td>
+<td><input type="number" name="n200" value="0" min="0" onchange="calc()"></td>
+<td id="t200">0</td>
+</tr>
+
+<tr id="row100">
+<td>100</td>
+<td><input type="number" name="n100" value="0" min="0" onchange="calc()"></td>
+<td id="t100">0</td>
+</tr>
+
+<tr id="row50">
+<td>50</td>
+<td><input type="number" name="n50" value="0" min="0" onchange="calc()"></td>
+<td id="t50">0</td>
+</tr>
+
+<tr id="row20">
+<td>20</td>
+<td><input type="number" name="n20" value="0" min="0" onchange="calc()"></td>
+<td id="t20">0</td>
+</tr>
+
+<tr id="row10">
+<td>10</td>
+<td><input type="number" name="n10" value="0" min="0" onchange="calc()"></td>
+<td id="t10">0</td>
+</tr>
+
+<tr id="row5">
+<td>5</td>
+<td><input type="number" name="n5" value="0" min="0" onchange="calc()"></td>
+<td id="t5">0</td>
+</tr>
+
+<tr class="total-row">
+<td colspan="2">Total Amount</td>
+<td id="total">0</td>
+</tr>
+
+<tr class="total-row">
+<td colspan="2">Add: Commission (2%)</td>
+<td id="commission">0</td>
+</tr>
+
+<tr class="total-row">
+<td colspan="2">Total Bill Amount</td>
+<td id="bill">0</td>
+</tr>
+
+</table>
+
+<div class="note-count">
+Total Notes: <span id="noteCount">0</span>
+</div>
+
+<div class="error" id="errorMsg"></div>
+
+<input type="hidden" name="amount" id="amount">
+
+<button class="btn">Submit Request</button>
+
+</form>
+
+</div>
+
+<script>
+
+function calc(){
+
+let notes=[500,200,100,50,20,10,5]
+
+let total=0
+let noteCount=0
+
+notes.forEach(function(v){
+
+let qty=document.querySelector(`input[name=n${v}]`).value
+
+qty=parseInt(qty)||0
+
+let t=qty*v
+
+document.getElementById(`t${v}`).innerText=t.toLocaleString()
+
+let row=document.getElementById(`row${v}`)
+
+if(qty>0){
+row.classList.add("highlight")
+}else{
+row.classList.remove("highlight")
+}
+
+total+=t
+noteCount+=qty
+
+})
+
+let commission=total*0.02
+let bill=total+commission
+
+document.getElementById("total").innerText=total.toLocaleString()
+document.getElementById("commission").innerText=commission.toFixed(2)
+document.getElementById("bill").innerText=bill.toFixed(2)
+document.getElementById("noteCount").innerText=noteCount
+
+document.getElementById("amount").value=total
+
+}
+
+function validateForm(){
+
+let total=document.getElementById("amount").value
+
+if(total==0){
+
+document.getElementById("errorMsg").innerText="Please enter at least one banknote."
+
+return false
+
+}
+
+return true
+
+}
+
+calc()
+
+</script>
+
+</body>
+</html>
