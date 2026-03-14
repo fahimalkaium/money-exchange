@@ -5,6 +5,8 @@ Author: Md. Kaium
 ## Manual Terminal run process
 & "c:\Users\z0042zpd\OneDrive - Siemens AG\My Old Folder\Training\22.1 Coursera\08. Python\Note Exchange\.venv\Scripts\python.exe" "c:\Users\z0042zpd\OneDrive - Siemens AG\My Old Folder\Training\22.1 Coursera\08. Python\Note Exchange\app.py"
 
+python app.py
+
 User One
 Mobile: 01914123412
 Pss: 1234
